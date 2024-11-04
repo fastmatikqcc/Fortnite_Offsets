@@ -7,9 +7,9 @@ namespace camera
 
 static auto UpdateCamera() -> void
 {
-	auto location_pointer = read<uintptr_t>(pointer->uworld + 0x130);
+	auto location_pointer = Kraft::read<uintptr_t>(pointer->uworld + 0x130);
 	//printf("Location -> ", location_pointer);
-	auto rotation_pointer = read<uintptr_t>(pointer->uworld + 0x140);
+	auto rotation_pointer = Kraft::read<uintptr_t>(pointer->uworld + 0x140);
 	//printf("Rotation -> ", rotation_pointer);
 
 	struct FNRotation
@@ -21,15 +21,15 @@ static auto UpdateCamera() -> void
 		double c; //0x01D0
 	}tpmrotation;
 
-	tpmrotation.a = read<double>(rotation_pointer);
-	tpmrotation.b = read<double>(rotation_pointer + 0x20);
-	tpmrotation.c = read<double>(rotation_pointer + 0x1d0);
+	tpmrotation.a = Kraft::read<double>(rotation_pointer);
+	tpmrotation.b = Kraft::read<double>(rotation_pointer + 0x20);
+	tpmrotation.c = Kraft::read<double>(rotation_pointer + 0x1d0);
 
 	/*tpmrotation = read<FNRotation>(rotation_pointer);*/
 
 	camera::rotation.x = asin(tpmrotation.c) * (180.0 / PI);
 	camera::rotation.y = ((atan2(tpmrotation.a * -1, tpmrotation.b) * (180.0 / PI)) * -1) * -1;
-	camera::location = read<fvector>(location_pointer);
-	camera::fov = read<float>(pointer->player_controller + 0x3AC) * 90.f;
+	camera::location = Kraft::read<fvector>(location_pointer);
+	camera::fov = Kraft::read<float>(pointer->player_controller + 0x3AC) * 90.f;
 
 }
