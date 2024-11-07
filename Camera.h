@@ -7,9 +7,9 @@ namespace camera
 
 static auto UpdateCamera() -> void
 {
-	auto location_pointer = Kraft::read<uintptr_t>(pointer->uworld + 0x130);
+	auto location_pointer = Kraft::read<uintptr_t>(pointer->uworld + 0x120);
 	//printf("Location -> ", location_pointer);
-	auto rotation_pointer = Kraft::read<uintptr_t>(pointer->uworld + 0x140);
+	auto rotation_pointer = Kraft::read<uintptr_t>(pointer->uworld + 0x130);
 	//printf("Rotation -> ", rotation_pointer);
 
 	struct FNRotation
